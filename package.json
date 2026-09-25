@@ -1,0 +1,33 @@
+{
+  "name": "clockwork",
+  "version": "1.0.0",
+  "description": "Clock-in / Clock-out app",
+  "homepage": "https://github.com/TamaraFdez/ClockWork#readme",
+  "bugs": {
+    "url": "https://github.com/TamaraFdez/ClockWork/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TamaraFdez/ClockWork.git"
+  },
+  "license": "ISC",
+  "author": "Tamara Fernández y Juan Carlos Barba",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:create": "node scripts/create-db.js",
+    "db:setup": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "db:reset": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+  },
+  "dependencies": {
+    "@sequelize/mariadb": "^7.0.0-alpha.48",
+    "dotenv": "^18.0.3",
+    "express": "^5.2.1",
+    "mariadb": "^3.5.4",
+    "sequelize": "^6.37.8"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.5"
+  }
+}
