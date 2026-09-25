@@ -17,7 +17,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:create": "node scripts/create-db.js",
-    "db:setup": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "db:setup": "npm run db:create & npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db:reset": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "dependencies": {
