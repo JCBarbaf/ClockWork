@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@sequelize/mariadb": "^7.0.0-alpha.48",
+    "cors": "^2.8.6",
     "dotenv": "^18.0.3",
     "express": "^5.2.1",
     "mariadb": "^3.5.4",
