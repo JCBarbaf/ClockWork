@@ -1,0 +1,41 @@
+# ── Node.js ──
+node_modules/
+.npm
+.nyc_output/
+coverage/
+*.tgz
+
+# ── Logs ──
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Variables de entorno (credenciales de MariaDB) ──
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ── Build / Producción ──
+dist/
+build/
+
+# ── MariaDB / MySQL ──
+*.sql.gz
+db/
+migrations/dumps/
+*.dump
+*.bak
+
+# ── IDE / OS ──
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# ── Cache ──
+.eslintcache
+.cache/   
