@@ -23,8 +23,14 @@ timeLogsButton.addEventListener('click', async (event) => {
       const typeClass = log.type === 'Clock-In' ? 'clock-in' : 'clock-out';
       li.classList.add(typeClass);
 
+      const date = new Date(log.datetime);
 
-      li.innerHTML = `<span>${log["employee_code"]}</span><span>${log.type === 'Clock-In' ? 'Entrada' : 'Salida'}</span>${log.datetime}`;
+        const formattedDate = date.toLocaleString("es-ES", {
+          dateStyle: "short",
+          timeStyle: "short",
+        });
+
+      li.innerHTML = `<span>${log["employee_code"]}</span><span>${log.type === 'Clock-In' ? 'Entrada' : 'Salida'}</span>${formattedDate}`;
 
       timeLogsList.appendChild(li);
     });
