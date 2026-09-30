@@ -50,10 +50,10 @@ router.post('/', async (req, res) => {
   }
 });
 
-outer.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const timeLogs = await db.query(
-      'SELECT * FROM \`time-logs\`'
+      'SELECT tl.type, tl.datetime, w.employee_code FROM \`time-logs\` AS tl INNER JOIN workers AS w ON  tl.worker_id = w.id'
     );
 
     res.json(timeLogs);
