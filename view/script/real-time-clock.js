@@ -14,6 +14,5 @@ function updateClock() {
     if (currDateTime.getDate() != lastDate) {
         lastDate = currDateTime.getDate();
         currentDateText.innerHTML = `${currDateTime.getDate()} de ${monthNames[currDateTime.getMonth()]} del ${currDateTime.getFullYear()}`
-        console.log(currDateTime.getDate())
     }
 }

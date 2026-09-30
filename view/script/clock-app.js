@@ -92,7 +92,7 @@ clockButton.addEventListener("click", async () => {
     employeeInput.value = "";
     message.classList.remove("success");
     message.classList.add('success');
-    message.querySelector(".message").innerHTML = ` ${actionText} registrada.`;
+    message.querySelector(".message").innerHTML = data.type === "Clock-In" ? ` ${actionText} registrada` : ` ${actionText} registrada - ${data.sessionHours} trabajados - ${data.totalHours} en total`;
 
     clockButton.disabled = true;
   } catch (error) {

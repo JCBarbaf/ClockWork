@@ -1,7 +1,9 @@
 const express = require('express');
 const db = require('../db');
+const TimeEntryManager = require('../classes/TimeEntryManager');
 
 const router = express.Router();
+const manager = new TimeEntryManager();
 
 router.post('/', async (req, res) => {
   try {
@@ -16,12 +18,28 @@ router.post('/', async (req, res) => {
       [workerId, type, now, now, now]
     );
 
-    res.status(201).json({
+    const response = {
       id: Number(result.insertId),
       workerId,
       type,
-      datetime: now
-    });
+      datetime: now,
+      sessionHours: '0h',
+      totalHours : 0
+    };
+
+    if (type === "Clock-Out") {
+        const timeEntries = await manager.createTimeEntries(workerId);
+
+        const currentEntry = timeEntries[timeEntries.length - 1];
+
+        const sessionHours = currentEntry ? getHoursString(currentEntry.calculateHours()) : 0
+        const totalHours = getHoursString(manager.getTotalHours(timeEntries));
+        
+        response.sessionHours = sessionHours;
+        response.totalHours = totalHours;
+    }
+
+    res.status(201).json(response);
 
   } catch (error) {
     console.error(error);
@@ -32,4 +50,26 @@ router.post('/', async (req, res) => {
   }
 });
 
+outer.get('/', async (req, res) => {
+  try {
+    const timeLogs = await db.query(
+      'SELECT * FROM \`time-logs\`'
+    );
+
+    res.json(timeLogs);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: 'Error al obtener los fichajes'
+    });
+  }
+});
+
+function getHoursString(difference) {
+    const hours = Math.floor(difference / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+    return(`${hours}h ${minutes}min`);
+}
 module.exports = router;
